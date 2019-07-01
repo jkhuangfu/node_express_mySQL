@@ -4,32 +4,21 @@
  * Module dependencies.
  */
 
-const app = require('../app');
-const debug = require('debug')('node-express-mysql:server');
-const http = require('http');
-const createSocketIoServer = require('../socket/socket.io');
-const createWebSocketServer = require('../socket/websocket')
+var app = require('../app');
+var debug = require('debug')('node-express-mysql:server');
+var http = require('http');
 /**
- * 
  * Get port from environment and store in Express.
  */
 
-const port = normalizePort(process.env.PORT || '3330');
+var port = normalizePort(process.env.PORT || '3330');
 app.set('port', port);
 
 /**
- * Create HTTP server && socket server.
+ * Create HTTP server.
  */
 
-const server = http.createServer(app);
-
-//socket 服务配置
-
-// socket.io 版本
-//createSocketIoServer(server);
-
-//原生 websocket 版本
-createWebSocketServer(server)
+var server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -45,7 +34,7 @@ log4.Info('服务启动成功,端口号为: ' + port)
  */
 
 function normalizePort(val) {
-    const port = parseInt(val, 10);
+    var port = parseInt(val, 10);
 
     if (isNaN(port)) {
         // named pipe
@@ -69,7 +58,7 @@ function onError(error) {
         throw error;
     }
 
-    const bind = typeof port === 'string' ?
+    var bind = typeof port === 'string' ?
         'Pipe ' + port :
         'Port ' + port;
 
@@ -93,8 +82,8 @@ function onError(error) {
  */
 
 function onListening() {
-    const addr = server.address();
-    const bind = typeof addr === 'string' ?
+    var addr = server.address();
+    var bind = typeof addr === 'string' ?
         'pipe ' + addr :
         'port ' + addr.port;
     debug('Listening on ' + bind);
